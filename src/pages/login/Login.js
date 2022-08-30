@@ -16,8 +16,11 @@ export default function Login() {
     
 
     return (
-        <div className={styles.['login-form']}>
-            <h2>LogIn</h2>
+        <form 
+            className={styles.['login-form']}
+            onSubmit={handleSubmit}
+            >
+            <h2>Log In</h2>
             <label>
                 <span>Email:</span>
                 <input 
@@ -38,8 +41,9 @@ export default function Login() {
             </label>
             <button 
                 className="btn"
-                onClick={handleSubmit}
-                >Submit</button>
-        </div>
+                >
+                Submit
+            </button>
+        </form>
     )
 }
