@@ -1,5 +1,6 @@
 // Hooks
 import { useState } from 'react'
+import { useSignup } from '../../hooks/useSignup'
 
 // Styles
 import styles from './SignUp.module.css'
@@ -7,14 +8,15 @@ import styles from './SignUp.module.css'
 export default function SignUp() {
     
     // State
-    const [displayName, setDisplayName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [displayName, setDisplayName] = useState('')
+    const { signup, isPending, error } = useSignup()
 
-    // Handlers
+    // Handle Functions
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log(displayName, email, password)
+        signup(email, password, displayName)
     }
 
     return (
@@ -23,15 +25,6 @@ export default function SignUp() {
             onSubmit={handleSubmit}
         >
             <h2>Sign Up</h2>
-            <label>
-                <span>Display Name:</span>
-                <input 
-                    type="text" 
-                    onChange={(e) => setDisplayName(e.target.value)}
-                    value={displayName}
-                    required
-                    />
-            </label>
             <label>
                 <span>Email:</span>
                 <input 
@@ -50,11 +43,18 @@ export default function SignUp() {
                     required
                     />
             </label>
-            <button 
-                className="btn"
-                >
-                Submit
-            </button>
+            <label>
+                <span>Display Name:</span>
+                <input 
+                    type="text" 
+                    onChange={(e) => setDisplayName(e.target.value)}
+                    value={displayName}
+                    required
+                    />
+            </label>
+            { !isPending &&  <button className="btn">Sign Up</button> }
+            { isPending && <button className="btn" disabled>Loading...</button>}
+            { error && <p>{ error }</p>}
         </form>
     )
 }
