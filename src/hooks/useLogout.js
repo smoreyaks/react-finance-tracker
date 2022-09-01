@@ -3,7 +3,7 @@ import { projectAuth } from '../firebase/Config'
 import { useAuthContext } from './useAuthContext'
 
 
-    const useLogout = () => {
+    export const useLogout = () => {
         const [error, setError] = useState(null)
         const [isPending, setIsPending] = useState(false)
         const { dispatch } = useAuthContext()
