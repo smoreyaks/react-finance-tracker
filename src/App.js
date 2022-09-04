@@ -7,27 +7,34 @@ import Login from './pages/login/Login';
 import SignUp from './pages/signup/SignUp';
 import Navbar from './components/Navbar';
 
+// Hooks
+import { useAuthContext } from './hooks/useAuthContext';
+
 // Styles
 import './App.css'
 
 
 function App() {
+  const { authIsReady } = useAuthContext()
+
   return (
     <div className="App">
-      <BrowserRouter>
-        <Navbar />
-        <Switch>
-          <Route exact path="/">
-            <Home/>
-          </Route>
-          <Route exact path="/login">
-            <Login/>
-          </Route>
-          <Route exact path="/signup">
-            <SignUp />
-          </Route>
-        </Switch>
-      </BrowserRouter>
+      { authIsReady && (
+        <BrowserRouter>
+          <Navbar />
+          <Switch>
+            <Route exact path="/">
+              <Home/>
+            </Route>
+            <Route exact path="/login">
+              <Login/>
+            </Route>
+            <Route exact path="/signup">
+              <SignUp />
+            </Route>
+          </Switch>
+        </BrowserRouter>
+      )}
     </div>
   );
 }
