@@ -24,7 +24,7 @@ export default function Navbar() {
                 )}
                 { user && (
                     <>
-                        <li>{user.displayName}</li>
+                        <li>Welcome, {user.displayName}</li>
                         <li>
                             <button 
                                 className='btn'
