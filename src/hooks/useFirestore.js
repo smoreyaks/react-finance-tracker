@@ -1,7 +1,7 @@
 // Add or Remove Documents to Firestore
 
 // Firebase
-import { projectFirestore } from '../firebase/Config'
+import { projectFirestore, timestamp } from '../firebase/Config'
 
 // Hooks
 import { useReducer, useEffect, useState } from 'react'
@@ -43,11 +43,12 @@ export const useFirestore = (collection) => {
 
     // Add New Document
     const addDocument = async (doc) => {
-        dispatch({ type: 'IS_PENDING' })
+        dispatch({ type: 'IS_PENDING', })
     }
     
     try {
-        const addedDocument = await ref.add(doc)
+        const createdAt = timestamp.fromDate(new Date())
+        const addedDocument = await ref.add({...doc, createdAt})
         dispatchIfNotCancelled({ type: 'ADDED_DOCUMENT', payload: addedDocument})
     }
     catch (err) {
