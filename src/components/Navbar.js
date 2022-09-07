@@ -15,7 +15,7 @@ export default function Navbar() {
     return (
         <nav className={styles.navbar}>
             <ul>
-                <li className={styles.title}><Link to="/">CashTrack</Link></li>
+                <li className={styles.title}><Link to="/">CashTrack App</Link></li>
                 { !user && (
                     <>
                         <li><Link to="/login">Log In</Link></li>
